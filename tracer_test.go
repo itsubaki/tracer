@@ -26,7 +26,7 @@ func TestMustPanic(t *testing.T) {
 	t.Fail()
 }
 
-func TestNewContext(t *testing.T) {
+func TestContext(t *testing.T) {
 	cases := []struct {
 		traceID   string
 		spanID    string

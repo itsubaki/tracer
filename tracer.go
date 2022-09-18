@@ -3,7 +3,6 @@ package tracer
 import (
 	"context"
 	"fmt"
-	"os"
 	"time"
 
 	gcp "github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace"
@@ -14,12 +13,6 @@ import (
 	"go.opentelemetry.io/otel/trace"
 )
 
-var (
-	projectID   = os.Getenv("PROJECT_ID")
-	serviceName = os.Getenv("K_SERVICE")  // https://cloud.google.com/run/docs/container-contract?hl=ja#services-env-vars
-	revision    = os.Getenv("K_REVISION") // https://cloud.google.com/run/docs/container-contract?hl=ja#services-env-vars
-)
-
 func Must(f func() error, err error) func() error {
 	if err != nil {
 		panic(err)
@@ -28,7 +21,7 @@ func Must(f func() error, err error) func() error {
 	return f
 }
 
-func Setup(timeout time.Duration) (func() error, error) {
+func Setup(projectID, serviceName, revision string, timeout time.Duration) (func() error, error) {
 	exporter, err := gcp.New(gcp.WithProjectID(projectID))
 	if err != nil {
 		return nil, fmt.Errorf("new exporter: %v", err)

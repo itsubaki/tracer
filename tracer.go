@@ -13,12 +13,8 @@ import (
 	"go.opentelemetry.io/otel/trace"
 )
 
-func Must(f func() error, err error) func() error {
-	if err != nil {
-		panic(err)
-	}
-
-	return f
+func MustSetup(projectID, serviceName, revision string, timeout time.Duration) func() error {
+	return Must(Setup(projectID, serviceName, revision, timeout))
 }
 
 func Setup(projectID, serviceName, revision string, timeout time.Duration) (func() error, error) {
@@ -78,4 +74,12 @@ func Context(ctx context.Context, traceID, spanID string, traceTrue bool) (conte
 		TraceFlags: flags,
 		Remote:     false,
 	})), nil
+}
+
+func Must(f func() error, err error) func() error {
+	if err != nil {
+		panic(err)
+	}
+
+	return f
 }

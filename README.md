@@ -15,8 +15,8 @@ func SetTraceID(c *gin.Context) {
 	c.Set("trace_id", xc.TraceID)
 	c.Set("span_id", xc.SpanID)
 	c.Set("trace_true", xc.TraceTrue)
-    
-    c.Next()
+
+	c.Next()
 }
 ```
 

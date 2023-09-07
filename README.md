@@ -19,3 +19,24 @@ func SetTraceID(c *gin.Context) {
     c.Next()
 }
 ```
+
+```go
+func Func(c *gin.Context) {
+	traceID := c.GetString("trace_id")
+	spanID := c.GetString("span_id")
+	traceTrue := c.GetBool("trace_true")
+
+	parent, err := tracer.Context(c.Request.Context(), traceID, spanID, traceTrue)
+	if err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	func() {
+		_, s := tr.Start(parent, "something to do")
+		defer s.End()
+
+		...
+	}
+...
+```

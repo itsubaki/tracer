@@ -1,8 +1,15 @@
 # tracer
 
+Example of using gin-gonic/gin
 
 ```go
-// Here's an example of using gin-gonic/gin.
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/itsubaki/tracer"
+)
+
 func SetTraceID(c *gin.Context) {
 	value := c.GetHeader("X-Cloud-Trace-Context")
 

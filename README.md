@@ -1,6 +1,6 @@
 # tracer
 
-Example of using gin-gonic/gin
+Example of using gin-gonic/gin.
 
 ```go
 import (

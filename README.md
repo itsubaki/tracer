@@ -37,6 +37,6 @@ func Func(c *gin.Context) {
 		defer s.End()
 
 		...
-	}
+	}()
 ...
 ```

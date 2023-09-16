@@ -33,7 +33,8 @@ func Parse(xCloudTraceContext string) (*XCloudTraceContext, error) {
 	// https://cloud.google.com/trace/docs/setup
 	// TRACE_TRUE must be 1 to trace this request. Specify 0 to not trace the request.
 	var traceTrue bool
-	if len(strings.Split(xCloudTraceContext, ";")) > 1 && strings.Split(xCloudTraceContext, ";")[1] == "o=1" {
+	spl := strings.Split(xCloudTraceContext, ";")
+	if len(spl) > 1 && spl[1] == "o=1" {
 		traceTrue = true
 	}
 
